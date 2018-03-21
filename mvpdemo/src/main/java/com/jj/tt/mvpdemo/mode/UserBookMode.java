@@ -9,14 +9,20 @@ import com.jj.tt.mvpdemo.interfaces.OnUserBookListener;
 import com.jj.tt.mvpdemo.mode.data.Book;
 import com.jj.tt.mvpdemo.prsenter.UserBookPresenter;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by chenmingying on 2018/3/8.
  */
 
 public class UserBookMode implements IGetUserBook {
 
+    public int mI1;
+    public OnUserBookListener mOnUserBookListener1;
+
     @Override
     public void getUserBook(final int i, final OnUserBookListener onUserBookListener) {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -38,6 +44,6 @@ public class UserBookMode implements IGetUserBook {
                 }
             }
         }).start();
-
     }
+
 }

@@ -1,4 +1,4 @@
-package com.jj.tt.mvpdemo.prsenter;
+package com.jj.tt.mvpdemo.base;
 
 import java.lang.ref.WeakReference;
 
@@ -6,9 +6,9 @@ import java.lang.ref.WeakReference;
  * Created by chenmingying on 2018/3/9.
  */
 
-public class BasePresenter<V> {
-    WeakReference<V> weakRefView;
-    public void attach(V view){
+public abstract class BasePresenter<V> {
+    protected WeakReference<V> weakRefView;
+    public void attachView(V view){
         weakRefView = new WeakReference<V>(view);
     }
 
@@ -27,5 +27,6 @@ public class BasePresenter<V> {
                 weakRefView.get() != null;
     }
 
+    public abstract void onDestroy();
 }
 

@@ -1,5 +1,6 @@
 package com.jj.tt.mvpdemo.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,25 +12,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jj.tt.mvpdemo.R;
+import com.jj.tt.mvpdemo.base.BaseMVPActivity;
+import com.jj.tt.mvpdemo.base.BasePresenter;
 import com.jj.tt.mvpdemo.interfaces.IUserBookShowListener;
 import com.jj.tt.mvpdemo.mode.UserBookMode;
 import com.jj.tt.mvpdemo.mode.data.Book;
 import com.jj.tt.mvpdemo.prsenter.UserBookPresenter;
 
-public class MainActivity extends AppCompatActivity implements IUserBookShowListener {
+public class MainActivity extends BaseMVPActivity<IUserBookShowListener,UserBookPresenter> implements IUserBookShowListener {
 
-    private UserBookPresenter userBookPresenter;
     private TextView tv_1;
     private Button bt_1;
+    private UserBookPresenter mUserBookPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        userBookPresenter = new UserBookPresenter();
-        userBookPresenter.attach(this);
         initView();
     }
+
 
     private void initView() {
         final EditText et_1 = findViewById(R.id.et_1);
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements IUserBookShowList
                     String s = et_1.getText().toString();
                     try {
                         Integer integer = Integer.valueOf(s);
-                        userBookPresenter.getUserBook(integer);
+                    mUserBookPresenter.getUserBook(integer);
                     }catch (Exception e){
                         Toast.makeText(MainActivity.this, "请输入数字",
                                 Toast.LENGTH_SHORT).show();
@@ -59,10 +61,13 @@ public class MainActivity extends AppCompatActivity implements IUserBookShowList
 
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        userBookPresenter.detach();
+    protected UserBookPresenter createPresenter() {
+        if (mUserBookPresenter==null) {
+            mUserBookPresenter = new UserBookPresenter(this);
+        }
+        return mUserBookPresenter;
     }
 
     @Override
