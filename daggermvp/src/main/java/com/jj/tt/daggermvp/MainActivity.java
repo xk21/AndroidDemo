@@ -37,9 +37,6 @@ public class MainActivity extends BaseMVPActivity<UserBookPresenter> implements 
         bt_1 = findViewById(R.id.bt_1);
         tv_1 = findViewById(R.id.tv_1);
 
-
-
-
         bt_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +53,6 @@ public class MainActivity extends BaseMVPActivity<UserBookPresenter> implements 
                 }
             }
         });
-
-
     }
 
     @Override

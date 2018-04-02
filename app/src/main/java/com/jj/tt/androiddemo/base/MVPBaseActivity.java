@@ -15,7 +15,7 @@ public abstract class MVPBaseActivity <V,T extends BasePresenter> extends Activi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = createPresenter();//创建presenter
-        mPresenter.attachView((V)this);//view与presenter建立关联
+        mPresenter.attachView(this);//view与presenter建立关联
         Log.i(TAG, "attachView-mPresenter="+mPresenter);
     }
 

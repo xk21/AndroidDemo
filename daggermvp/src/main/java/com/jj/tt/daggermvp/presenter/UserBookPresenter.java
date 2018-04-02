@@ -16,14 +16,14 @@ import javax.inject.Inject;
  * Created by chenmingying on 2018/3/8.
  */
 
-public class UserBookPresenter extends BasePresenter {
+public class UserBookPresenter extends BasePresenter<IUserBookShowListener> {
 
     @Inject
     UserBookMode mUserBookMode;
     private IUserBookShowListener iUserBookShowListener;
 
     public UserBookPresenter( Context iUserBookShowListener) {
-        this.iUserBookShowListener = (IUserBookShowListener)iUserBookShowListener;
+        this.iUserBookShowListener = obtainView();
         DaggerUserBookPresenterComponet.create().inject(this);
     }
 

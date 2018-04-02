@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.tv_1);
-        DaggerTestMainComponent.create().inject(this);
+        DaggerTestComponent.create().inject(this);
 
-        textView.setText(mUser.getName()+ mBook.getName());
+        textView.setText("用户名:"+mUser.getName()+"\n书    名:"+ mBook.getName());
     }
 }

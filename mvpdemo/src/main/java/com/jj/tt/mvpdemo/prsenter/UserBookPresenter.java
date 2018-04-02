@@ -10,13 +10,12 @@ import com.jj.tt.mvpdemo.mode.data.Book;
  * Created by chenmingying on 2018/3/8.
  */
 
-public class UserBookPresenter extends BasePresenter {
+public class UserBookPresenter extends BasePresenter<IUserBookShowListener> {
 
     private UserBookMode mUserBookMode;
-    private IUserBookShowListener iUserBookShowListener;
+    //private IUserBookShowListener iUserBookShowListener;
 
     public UserBookPresenter(IUserBookShowListener iUserBookShowListener) {
-        this.iUserBookShowListener = iUserBookShowListener;
         mUserBookMode = new UserBookMode();
     }
 
@@ -24,18 +23,15 @@ public class UserBookPresenter extends BasePresenter {
         mUserBookMode.getUserBook(i, new OnUserBookListener() {
             @Override
             public void getUserBookSuccess(Book book) {
-                if (iUserBookShowListener==null){
-                    return;
-                }
-                iUserBookShowListener.getUserBookSuccess(book);
+
+                if (isAttach())
+                obtainView().getUserBookSuccess(book);
             }
 
             @Override
             public void getUserBookFailed(String book) {
-                if (iUserBookShowListener==null){
-                    return;
-                }
-                iUserBookShowListener.getUserBookFailed(book);
+                if (isAttach())
+                obtainView().getUserBookFailed(book);
             }
         });
     }
@@ -43,9 +39,6 @@ public class UserBookPresenter extends BasePresenter {
 
     @Override
     public void onDestroy() {
-        if (iUserBookShowListener!= null){
-            iUserBookShowListener =null;
-        }
         System.gc();
     }
 }

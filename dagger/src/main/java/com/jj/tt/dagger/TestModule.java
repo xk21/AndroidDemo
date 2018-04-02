@@ -9,7 +9,7 @@ import dagger.Provides;
  * Created by chenmingying on 2018/3/20.
  */
 @Module
-public class MainModule {
+public class TestModule {
 
     @Provides
     Book provideBook(){

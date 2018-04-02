@@ -11,7 +11,7 @@ public class User {
 
     @Inject
     public User(){
-        this.name = "Heeroo";
+        this.name = "Sir1";
     }
 
     public String getName(){

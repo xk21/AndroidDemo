@@ -40,7 +40,6 @@ public class MainActivity extends BaseMVPActivity<IUserBookShowListener,UserBook
 
 
 
-
         bt_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

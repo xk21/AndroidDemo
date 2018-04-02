@@ -12,26 +12,27 @@ import com.jj.tt.androiddemo.view.ILoginView;
 /**
  * Created by admin on 2017/3/15.
  */
-public class LoginPresenter extends BasePresenter {
+public class LoginPresenter extends BasePresenter<ILoginView> {
     ILoginBiz iLoginBiz;
     ILoginView iLoginView;
     public LoginPresenter(ILoginView iLoginView) {
-        this.iLoginView=iLoginView;
+
         iLoginBiz=new LoginBizImpl();//需构造的是实现类
     }
 
     Handler mHandler = new Handler();
     public void login() {
-        iLoginView.showProgress();
+
+        getReference().showProgress();
         //执行耗时操作
-        iLoginBiz.login(iLoginView.getName(), iLoginView.getPassword(), new ILoginLisener() {
+        iLoginBiz.login(getReference().getName(), getReference().getPassword(), new ILoginLisener() {
             @Override
             public void loginSuccess() {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        iLoginView.hideProgress();//然后toast提示成功
-                        iLoginView.loginSuccess();
+                        getReference().hideProgress();//然后toast提示成功
+                        getReference().loginSuccess();
                     }
                 });
 
@@ -42,8 +43,8 @@ public class LoginPresenter extends BasePresenter {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        iLoginView.hideProgress();//然后toast提示失败
-                        iLoginView.loginFailer();
+                        getReference().hideProgress();//然后toast提示失败
+                        getReference().loginFailer();
                     }
                 });
 
